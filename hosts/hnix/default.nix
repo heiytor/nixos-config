@@ -5,9 +5,11 @@
     [
       ./hardware-configuration.nix
 
+      ./security/sudo.nix
       ./services/docker.nix
       ./services/pipewire.nix
       ./services/xserver.nix
+      ./services/ssh.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -36,11 +38,6 @@
     };
 
   nixpkgs.config.allowUnfree = true;
-
-  # SSH
-  services.openssh = {
-    enable = true;
-  };
 
   # Disable sudo password prompt
   security.sudo.extraRules = [
