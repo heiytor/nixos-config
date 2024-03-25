@@ -8,7 +8,7 @@
         defaultBranch = "main";
       };
       core = {
-        editor = "vim";
+        editor = "nvim";
         pager = "delta";
       };
       user = {
