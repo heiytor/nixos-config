@@ -30,6 +30,7 @@
     delta       # Git syntax-highlighting pager
     rofi        # Dmenu replacement
     pavucontrol # Volume control
+    xclip       # Clipboard library
 
     # TODO: handle it
     go
