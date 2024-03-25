@@ -119,7 +119,7 @@
 
         --- Sets a key.
         ---@param k table
-        keymap.set = function(k)
+        keymap.map = function(k)
           vim.keymap.set(k.mode, k.lhs, k.rhs, k.opts)
         end
 
@@ -127,7 +127,7 @@
         ---
         ---@param keys table The list of key bindings.
         ---@param opts table Optional table of default options to be applied to each key binding.
-        keymap.setN = function(keys, opts)
+        keymap.map_table = function(keys, opts)
           for _, k in ipairs(keys) do
             if opts then
               for o_k, o_v in pairs(opts) do
@@ -154,7 +154,7 @@
           { mode = "n", lhs = ";p", rhs = "<nop>", opts = {} },
         }
 
-        keys.std = {
+        keys.std= {
           -- Normal MODE
           {
             mode = "n",
@@ -251,8 +251,8 @@
           },
         }
 
-        keymap.setN(keys.nop, {})
-        keymap.setN(keys.std, {})
+        keymap.map_table(keys.nop, {})
+        keymap.map_table(keys.std, {})
 
         -------------------------------------------
         -------------------------------------------
@@ -312,7 +312,7 @@
               },
             }
 
-            keymap.setN(keys, { buffer = bufnr })
+            keymap.map_table(keys, { buffer = bufnr })
           end,
 
           current_line_blame_opts = { delay = 10 },
@@ -447,7 +447,7 @@
           },
         }
 
-        keymap.setN(keys.telescope, {})
+        keymap.map_table(keys.telescope, {})
 
         -- Harpoon
 
@@ -502,7 +502,7 @@
           },
         }
 
-        keymap.setN(keys.harpoon, {})
+        keymap.map_table(keys.harpoon, {})
 
         -- LSP, autocompletions and formatters
 
@@ -555,7 +555,7 @@
             },
           }
 
-          keymap.setN(keys, { buffer = bufnr, remap = false })
+          keymap.map_table(keys, { buffer = bufnr, remap = false })
         end)
 
         LSPconfig.gopls.setup({
@@ -592,7 +592,7 @@
 
         require("formatter").setup({
           filetype = {
-            go = require("formatter.filetypes").go.gofumpt,
+            go = require("formatter.filetypes").go.gopls,
           },
         })
 
