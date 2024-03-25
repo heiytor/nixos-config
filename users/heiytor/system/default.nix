@@ -4,8 +4,12 @@
   users.users.heiytor = {
     isNormalUser = true;
     description = "Heitor Danilo";
-    extraGroups = [ "networkmanager" "wheel" "docker" "storage" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "storage"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -33,4 +37,3 @@
     };
   };
 }
-
