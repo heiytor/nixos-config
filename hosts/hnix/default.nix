@@ -4,6 +4,9 @@
   imports =
     [
       ./hardware-configuration.nix
+
+      ./services/xserver.nix
+      ./services/pipewire.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -84,47 +87,8 @@
     xclip
   ];
 
-  # X11 and AwesomeWM
-  services.xserver = {
-    enable = true;
-    autorun = true;
-    layout = "us";
-    xkbVariant = "";
-    displayManager = {
-      lightdm = {
-        enable = true;
-      };
-      defaultSession = "none+awesome";
-      autoLogin = {
-        enable = true;
-        user = "heiytor";
-      };
-    };
-    windowManager = {
-      awesome = {
-        enable = true;
-      };
-    };
-  };
-
   # SSH
   services.openssh = {
-    enable = true;
-  };
-
-  # Audio and pipewire
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse = {
-      enable = true;
-    };
-  };
-  # Recommended to use with pipewire
-  security.rtkit = {
     enable = true;
   };
 
@@ -140,37 +104,4 @@
       ];
     }
   ];
-
-  virtualisation.docker = {
-    enable = true;
-    daemon = {
-      settings = {
-        data-root = "/mount/extern-1/lib/docker";
-      };
-    };
-  };
-
-  # TODO: put it in the home.nix
-  # programs.zsh = {
-  #   enable = true;
-  #   shellAliases = {
-  #     "g" = "git";
-  #     "v" = "vim";
-  #     "c" = "clear";
-
-  #     "rebuild" = "sudo nixos-rebuild switch";
-  #   };
-  #   enableCompletion = true;
-  #   autosuggestions = {
-  #     enable = true;
-  #   };
-  #   syntaxHighlighting = {
-  #     enable = true;
-  #   };
-  #   ohMyZsh = {
-  #     enable = true;
-  #     plugins = [ "git" "sudo" ];
-  #     theme = "sorin";
-  #   };
-  # };
 }
