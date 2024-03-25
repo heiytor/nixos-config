@@ -1,0 +1,37 @@
+{ config, pkgs, ... }:
+
+{
+  # Self download
+  programs.home-manager.enable = true;
+
+  home = {
+    username = "heiytor";
+    homeDirectory = "/home/heiytor";
+    stateVersion = "23.11";
+  };
+
+  imports = [
+    (import ./editor/nvim.nix { inherit config pkgs ;})
+    (import ./editor/vim.nix { inherit config pkgs ;})
+    (import ./misc/fonts.nix { inherit config pkgs ;})
+    (import ./misc/git.nix { inherit config pkgs ;})
+    (import ./shell/zsh.nix { inherit config pkgs ;})
+    (import ./terminal/alacritty.nix { inherit config pkgs; })
+  ];
+
+  home.packages = with pkgs; [
+    # Packages that I don't need to handle manually
+    firefox
+    discord
+    feh         # Image viewer
+    flameshot   # Screenshot software
+    gh          # Github CLI
+    delta       # Git syntax-highlighting pager
+    rofi        # Dmenu replacement
+    pavucontrol # Volume control
+
+    # TODO: handle it
+    go
+    polybarFull
+  ];
+}
