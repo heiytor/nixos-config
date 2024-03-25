@@ -38,7 +38,7 @@
         condition = "gitdir:~/projects/oss/";
         contents = {
           user = {
-            email = "heitor.danilo@osssystems.com.br";
+            email = "heitor.danilo@ossystems.com.br";
           };
         };
       }
