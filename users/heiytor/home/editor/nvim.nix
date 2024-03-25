@@ -41,10 +41,16 @@
         vim.opt.number = false
         vim.opt.relativenumber = false
         vim.opt.colorcolumn = "0"
+
         vim.opt.tabstop = 4
         vim.opt.softtabstop = 4
         vim.opt.shiftwidth = 4
         vim.opt.expandtab = true
+        -- Nix files only need 2 spaces
+        vim.cmd[[
+          autocmd FileType nix setlocal tabstop=2 softtabstop=2 shiftwidth=2
+        ]]
+
         vim.opt.smartindent = true
         vim.opt.wrap = false
         vim.opt.swapfile = false
@@ -58,6 +64,7 @@
         vim.opt.signcolumn = "yes"
         vim.opt.isfname:append("@-@")
         vim.opt.updatetime = 50
+
 
         -------------------------------------------
         -------------------------------------------
