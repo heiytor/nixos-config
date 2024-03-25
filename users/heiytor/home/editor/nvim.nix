@@ -37,10 +37,17 @@
         -- startup
 
         vim.g.mapleader = " "
+
         vim.opt.nu = false
         vim.opt.number = false
         vim.opt.relativenumber = false
+
         vim.opt.colorcolumn = "0"
+        -- For Git commits, the 73rd column is marked as the colorcolumn,
+        -- representing the maximum limit for writing.
+        vim.cmd[[
+          autocmd FileType gitcommit setlocal colorcolumn=73
+        ]]
 
         vim.opt.tabstop = 4
         vim.opt.softtabstop = 4
