@@ -3,5 +3,5 @@
 {
   security.sudo = {
     wheelNeedsPassword = false;
-  }
+  };
 }
