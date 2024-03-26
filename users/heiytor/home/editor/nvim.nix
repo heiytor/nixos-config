@@ -592,7 +592,7 @@
 
         require("formatter").setup({
           filetype = {
-            go = require("formatter.filetypes").go.gopls,
+            go = require("formatter.filetypes").go.gofmt,
           },
         })
 
