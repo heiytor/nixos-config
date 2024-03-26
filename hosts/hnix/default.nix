@@ -39,16 +39,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Disable sudo password prompt
-  security.sudo.extraRules = [
-    {
-      users = [ "heiytor" ];
-      commands = [
-        {
-          command = "ALL";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
+  environment.systemPackages = with pkgs; [
+    vim
+    xclip
+    gnumake
   ];
 }
