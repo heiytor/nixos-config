@@ -31,6 +31,10 @@
     rofi        # Dmenu replacement
     pavucontrol # Volume control
     xclip       # Clipboard library
+    httpie      # HTTP client
+
+    # TODO: install this in a shell environment
+    openssl
 
     # TODO: handle it
     go
