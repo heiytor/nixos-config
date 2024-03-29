@@ -16,6 +16,7 @@
     (import ./misc/fonts.nix { inherit config pkgs ;})
     (import ./misc/git.nix { inherit config pkgs ;})
     (import ./misc/picom.nix { inherit config pkgs ;})
+    (import ./misc/polybar.nix { inherit config pkgs ;})
     (import ./misc/ssh.nix { inherit config pkgs ;})
     (import ./shell/zsh.nix { inherit config pkgs ;})
     (import ./terminal/alacritty.nix { inherit config pkgs; })
@@ -39,6 +40,5 @@
 
     # TODO: handle it
     go
-    polybarFull
   ];
 }
