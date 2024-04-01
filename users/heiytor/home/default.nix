@@ -35,10 +35,8 @@
     xclip       # Clipboard library
     httpie      # HTTP client
 
-    # TODO: install this in a shell environment
+    # TODO: install this in a dev environment
     openssl
-
-    # TODO: handle it
     go
   ];
 }

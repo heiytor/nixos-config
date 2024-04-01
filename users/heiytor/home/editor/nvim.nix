@@ -5,10 +5,24 @@
     enable = true;
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
-      plenary-nvim
-      telescope-nvim
+      # Treesitter
       nvim-treesitter.withAllGrammars
       nvim-treesitter-context
+
+      # LSP, auto-completion and formatters
+      lsp-zero-nvim
+      nvim-lspconfig
+      formatter-nvim
+      nvim-cmp
+      cmp-nvim-lsp
+      luasnip
+      
+      # Colorschemes
+      kanagawa-nvim
+
+      # Misc
+      plenary-nvim
+      telescope-nvim
       gitsigns-nvim
       nvim-autopairs
       lualine-nvim
@@ -19,18 +33,13 @@
       nvim-colorizer-lua
       rainbow-delimiters-nvim
       todo-comments-nvim
-      kanagawa-nvim
-      lsp-zero-nvim
-      nvim-lspconfig
-      formatter-nvim
-      nvim-cmp
-      cmp-nvim-lsp
-      luasnip
     ];
     extraPackages = with pkgs; [
       ripgrep # telescope
       git     # gitsigns
-      gopls
+      xclip   # copy to clipboard keybinding
+      gopls   # go language server
+      nixd    # nix language server
     ];
     extraConfig = ''
       lua << EOF
@@ -558,6 +567,7 @@
           keymap.map_table(keys, { buffer = bufnr, remap = false })
         end)
 
+        -- go language server
         LSPconfig.gopls.setup({
           settings = {
             gopls = {
@@ -574,6 +584,9 @@
             },
           },
         })
+
+        -- nix language server
+        LSPconfig.nixd.setup({})
 
         local CMP = require("cmp")
         CMP.setup({
