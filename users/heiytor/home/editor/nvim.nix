@@ -35,11 +35,12 @@
       todo-comments-nvim
     ];
     extraPackages = with pkgs; [
-      ripgrep # telescope
-      git     # gitsigns
-      xclip   # copy to clipboard keybinding
-      gopls   # go language server
-      nixd    # nix language server
+      ripgrep       # telescope
+      git           # gitsigns
+      xclip         # copy to clipboard keybinding
+      gopls         # go language server
+      rust-analyzer # rust language server
+      nixd          # nix language server
     ];
     extraConfig = ''
       lua << EOF
@@ -580,6 +581,17 @@
                 parameterNames = true,
                 functionTypeParameters = false,
                 rangeVariableTypes = false,
+              },
+            },
+          },
+        })
+
+        -- rust language server
+        LSPconfig.rust_analyzer.setup({
+          settings = {
+            ["rust-analyzer"] = {
+              inlayHints = {
+                maxLength = 25,
               },
             },
           },
