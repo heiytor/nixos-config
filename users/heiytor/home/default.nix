@@ -20,6 +20,7 @@
     (import ./misc/ssh.nix { inherit config pkgs ;})
     (import ./shell/zsh.nix { inherit config pkgs ;})
     (import ./terminal/alacritty.nix { inherit config pkgs; })
+    (import ./terminal/kitty.nix { inherit pkgs; })
   ];
 
   home.sessionVariables = {
