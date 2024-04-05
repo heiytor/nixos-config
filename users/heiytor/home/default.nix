@@ -22,6 +22,10 @@
     (import ./terminal/alacritty.nix { inherit config pkgs; })
   ];
 
+  home.sessionVariables = {
+    TERMINAL = "alacritty";
+  };
+
   home.packages = with pkgs; [
     # Packages that I don't need to handle manually
     firefox
