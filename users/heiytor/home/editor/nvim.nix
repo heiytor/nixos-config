@@ -259,6 +259,15 @@
               desc = "Copy to clipboard.",
             },
           },
+          -- Select mode
+          {
+            mode = "x",
+            lhs = "p",
+            rhs = [["_dP]],
+            opts = {
+              desc = "As theprimeagen said, greatest remap ever",
+            },
+          },
         }
 
         keymap.map_table(keys.nop, {})
