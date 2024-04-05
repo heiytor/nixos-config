@@ -34,6 +34,7 @@
     pavucontrol # Volume control
     xclip       # Clipboard library
     httpie      # HTTP client
+    insomnia    # Rest API client
 
     # TODO: install this in a dev environment
     openssl
