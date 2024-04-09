@@ -10,6 +10,7 @@
       ./services/pipewire.nix
       ./services/xserver.nix
       ./services/ssh.nix
+      ./services/udev.nix
       # ./services/zerotier.nix
     ];
 
