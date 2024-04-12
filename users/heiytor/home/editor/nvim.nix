@@ -3,6 +3,7 @@
 {
   programs.neovim = {
     enable = true;
+    package = pkgs.neovim-nightly;
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
       # Treesitter
@@ -640,6 +641,53 @@
           ]],
           false
         )
+
+        -- Inlay hints
+        -- Automatically enable when entering Insert mode, and disable them upon leaving.
+        -- Can be disabled with "<leader>nn" at Normal mode.
+        local inlay_hints = {}
+        inlay_hints.on_insert = function()
+          local valid_filetypes = { "go", "rust" }
+          local use_inlay_hints = true
+
+          vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+            callback = function()
+              if not use_inlay_hints then
+                return
+              end
+
+              for _, ft in ipairs(valid_filetypes) do
+                if vim.bo.filetype == ft then
+                  vim.lsp.inlay_hint.enable(0, true)
+                  return
+                end
+              end
+            end,
+          })
+
+          vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+            callback = function()
+              if not use_inlay_hints then
+                return
+              end
+
+              vim.lsp.inlay_hint.enable(0, false)
+            end,
+          })
+
+          keymap.map({
+            mode = "n",
+            lhs = keymap.leader("nn"),
+            rhs = function()
+              use_inlay_hints = not use_inlay_hints
+            end,
+            opts = {
+            	desc = "Toggle inlay hints",
+            },
+          })
+        end
+
+        inlay_hints.on_insert()
       EOF
     '';
   };
