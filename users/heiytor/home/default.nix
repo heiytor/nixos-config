@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Self download
@@ -40,6 +40,8 @@
     xclip       # Clipboard library
     httpie      # HTTP client
     insomnia    # Rest API client
+    alsa-utils
+    yad         # Dialog helper
 
     # TODO: install this in a dev environment
     openssl
