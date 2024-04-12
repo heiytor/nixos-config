@@ -12,7 +12,6 @@
 
   imports = [
     (import ./editor/nvim.nix { inherit config pkgs ;})
-    (import ./editor/vim.nix { inherit config pkgs ;})
     (import ./misc/fonts.nix { inherit config pkgs ;})
     (import ./misc/git.nix { inherit config pkgs ;})
     (import ./misc/picom.nix { inherit config pkgs ;})
