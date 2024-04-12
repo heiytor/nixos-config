@@ -22,6 +22,16 @@
     (import ./terminal/kitty.nix { inherit pkgs; })
   ];
 
+  nixpkgs = {
+    overlays = [
+      inputs.neovim-nightly-overlay.overlay
+    ];
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
+  };
+
   home.sessionVariables = {
     TERMINAL = "alacritty";
   };
