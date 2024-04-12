@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  services.polybar = {
+  services.polybar = let
+    amixer = "${pkgs.alsa-utils}/bin/amixer";
+    grep = "${pkgs.gnugrep}/bin/grep";
+  in {
     package = pkgs.polybarFull;
     enable = true;
     script = ''
@@ -10,15 +13,21 @@
     '';
     config = {
       "colors" = {
-        background = "#161616";
+        background = "#90161616"; # COLOR: #161616
         foreground = "#C6C6C6";
         primary = "#AF87D7";
         alert = "#AF5F87";
         disabled = "#707880";
+        urgent = "#F27360";
       };
       "bar/example" = {
         font-0 = "JetBrainsMono:size=10;2";
-        font-1 = "Font Awesome 6 Free Solid:size=9;2";
+        
+        # Nerd fonts
+        font-1 = "FontAwesome6Free:style=Solid:size=9;2";
+        font-2 = "FontAwesome6Free:style=Regular:size=9;2";
+        font-3 = "FontAwesome6Brands:style=Regular:size=9;2";
+
         width = "100%";
         height = "18pt";
         radius = 0;
@@ -30,13 +39,55 @@
         padding-left = 0;
         padding-right = 1;
         module-margin = 1;
-        separator = "|";
+        separator = "";
         separator-foreground = "\${colors.disabled}";
-        modules-left = "tags windows";
-        modules-right = "audio cpu mem date systray";
+        modules-left = "tags";
+        modules-center = "date";
+        modules-right = "systray  audio microphone";
         cursor-click = "pointer";
         cursor-scroll = "ns-resize";
         enable-ipc = true;
+      };
+      "module/windows" = {
+        type = "internal/xwindow";
+        label = "%title:0:60:...%";
+      };
+      "module/microphone" = {
+        type = "custom/script";
+        tail = true;
+        exec = ''
+          if ${amixer} get Capture | ${grep} -q '\\[on\\]'; then echo ''; else echo ''; fi
+        '';
+        click-left = ''
+          ${amixer} set Capture toggle
+        '';
+      };
+      "module/audio" = {
+        type = "internal/pulseaudio";
+        use-ui-max = false;
+        interval = 5;
+
+        format-volume = "<ramp-volume>";
+        ramp-volume-0 = "";
+        ramp-volume-1 = "";
+        ramp-volume-2 = "";
+
+        format-muted = "<label-muted>";
+        label-muted = "muted";
+        label-muted-foreground = "\${colors.urgent}";
+      };
+      "module/date" = {
+        type = "internal/date";
+        interval = 1;
+        date = "%a %Y-%m-%d %H:%M"; # Fri 2024-03-29 09:23
+        label = "%date%";
+        label-foreground = "\${colors.foreground}";
+      };
+      "module/systray" = {
+        type = "internal/tray";
+        tray-size = "60%";
+        tray-spacing = "12pt";
+        format-margin = "0pt";
       };
       "module/tags" = {
         type = "internal/xworkspaces";
@@ -53,45 +104,6 @@
         label-empty = "%name%";
         label-empty-foreground = "\${colors.disabled}";
         label-empty-padding = 1;
-      };
-      "module/windows" = {
-        type = "internal/xwindow";
-        label = "%title:0:60:...%";
-      };
-      "module/audio" = {
-        type = "internal/pulseaudio";
-        format-volume-prefix = "VOL ";
-        format-volume-prefix-foreground = "\${colors.primary}";
-        format-volume = "<label-volume>";
-        label-volume = "%percentage%%";
-        label-muted = "muted";
-        label-muted-foreground = "\${colors.disabled}";
-      };
-      "module/cpu" = {
-        type = "internal/cpu";
-        interval = 2;
-        format-prefix = "CPU ";
-        format-prefix-foreground = "\${colors.primary}";
-        label = "%percentage:2%%";
-      };
-      "module/mem" = {
-        type = "internal/memory";
-        interval = 2;
-        format-prefix = "RAM ";
-        format-prefix-foreground = "\${colors.primary}";
-        label = "%percentage_used:2%%";
-      };
-      "module/date" = {
-        type = "internal/date";
-        interval = 1;
-        date = "%a %Y-%m-%d %H:%M"; # Fri 2024-03-29 09:23
-        label = "%date%";
-        label-foreground = "\${colors.foreground}";
-      };
-      "module/systray" = {
-        type = "internal/tray";
-        format-margin = "0pt";
-        tray-spacing = "8pt";
       };
       "settings" = {
         screenchange-reload = true;
