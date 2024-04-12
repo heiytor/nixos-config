@@ -8,6 +8,8 @@
     opacityRules = [
         "90:class_g = 'Alacritty' && focused"
         "80:class_g = 'Alacritty' && !focused"
+        "90:class_g = 'kitty' && focused"
+        "80:class_g = 'kitty' && !focused"
     ];
   };
 }
