@@ -1,6 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
+  systemd.network.enable = true;
   # Workaround fix for nm-online-service from stalling on Wireguard interface.
   # Refs: https://github.com/NixOS/nixpkgs/issues/180175
   systemd.network.wait-online.enable = false;

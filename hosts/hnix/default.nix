@@ -11,7 +11,7 @@
       ./services/xserver.nix
       ./services/ssh.nix
       ./services/udev.nix
-      # ./services/zerotier.nix
+      ./services/zerotier.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
