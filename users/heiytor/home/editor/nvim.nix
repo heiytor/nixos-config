@@ -42,6 +42,7 @@
       gopls         # go language server
       rust-analyzer # rust language server
       nixd          # nix language server
+      clang         # c languague tools
     ];
     extraConfig = ''
       lua << EOF
@@ -609,6 +610,9 @@
 
         -- nix language server
         LSPconfig.nixd.setup({})
+
+        -- c language server
+        LSPconfig.clangd.setup({ settings = {} })
 
         local CMP = require("cmp")
         CMP.setup({
