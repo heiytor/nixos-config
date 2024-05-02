@@ -38,13 +38,14 @@
       todo-comments-nvim
     ];
     extraPackages = with pkgs; [
+      # TODO: install LSP in flake.nix
       ripgrep       # telescope
       git           # gitsigns
       xclip         # copy to clipboard keybinding
       gopls         # go language server
       rust-analyzer # rust language server
       nixd          # nix language server
-      clang         # c languague tools
+      clang-tools   # c languague tools
     ];
     extraConfig = ''
       lua << EOF
