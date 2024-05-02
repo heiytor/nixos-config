@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  programs.neovim = {
+  programs.neovim = let
+    typescript-language-server = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
+  in {
     enable = true;
     package = pkgs.neovim-nightly;
     defaultEditor = true;
@@ -614,6 +616,11 @@
         -- c language server
         LSPconfig.clangd.setup({ settings = {} })
 
+        -- typescript language server
+        LSPconfig.tsserver.setup({
+          cmd = { "${typescript-language-server}", "--stdio" }
+        })
+
         local CMP = require("cmp")
         CMP.setup({
           sources = {
@@ -651,7 +658,7 @@
         -- Can be disabled with "<leader>nn" at Normal mode.
         local inlay_hints = {}
         inlay_hints.on_insert = function()
-          local valid_filetypes = { "go", "rust" }
+          local valid_filetypes = { "go", "rust", "typescript" }
           local use_inlay_hints = true
 
           vim.api.nvim_create_autocmd({ "InsertEnter" }, {
