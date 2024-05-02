@@ -619,7 +619,45 @@
 
         -- typescript language server
         LSPconfig.tsserver.setup({
-          cmd = { "${typescript-language-server}", "--stdio" }
+          cmd = { "${typescript-language-server}", "--stdio" },
+          settings = {
+            javascript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayVariableTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+            typescript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayVariableTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+            typescriptreact = {
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayVariableTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+          },
         })
 
         local CMP = require("cmp")
@@ -659,7 +697,7 @@
         -- Can be disabled with "<leader>nn" at Normal mode.
         local inlay_hints = {}
         inlay_hints.on_insert = function()
-          local valid_filetypes = { "go", "rust", "typescript" }
+          local valid_filetypes = { "go", "rust", "typescript", "typescriptreact" }
           local use_inlay_hints = true
 
           vim.api.nvim_create_autocmd({ "InsertEnter" }, {
