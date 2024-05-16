@@ -52,6 +52,8 @@
     alsa-utils
     yad         # Dialog helper
     unzip
+    unrar
+    nix-prefetch
 
     # TODO: install this in a dev environment
     openssl
