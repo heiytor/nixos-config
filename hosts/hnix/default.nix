@@ -46,7 +46,5 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    xclip
-    gnumake
   ];
 }
