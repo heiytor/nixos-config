@@ -35,11 +35,12 @@
     ];
   };
 
-  # Mount external devices
-  fileSystems."/mount/extern-1" =
-    { device = "/dev/disk/by-uuid/262aba5c-d6f1-46bd-8602-60d36d1c1dd0";
-      fsType = "btrfs";
-    };
+  boot.supportedFilesystems = [ "ntfs" ];
+  fileSystems."/mnt/extern-1" = {
+    device = "/dev/disk/by-uuid/AE1A53381A52FCB1";
+    fsType = "ntfs-3g";
+    options = [ "rw" "uid=1000"];
+  };
 
   nixpkgs.config.allowUnfree = true;
 

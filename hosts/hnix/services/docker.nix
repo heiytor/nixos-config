@@ -5,7 +5,7 @@
     enable = true;
     daemon = {
       settings = {
-        data-root = "/mount/extern-1/lib/docker";
+        data-root = "/mnt/extern-1/lib/docker";
       };
     };
   };
