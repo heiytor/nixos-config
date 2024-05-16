@@ -3,6 +3,15 @@
 {
   programs.neovim = let
     typescript-language-server = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
+    telescope-any = pkgs.vimUtils.buildVimPlugin {
+      name = "telescope-any";
+      src = pkgs.fetchFromGitHub {
+        owner = "d00h";
+        repo = "telescope-any";
+        rev = "0e79dd6131c8a7282899679cd9ffa14e74d2c973";
+        hash = "sha256-S6IE2VJ8dPoAhg2CBvQ3KO3BD56Q9GLJJwQ1r0+UfXo=";
+      };
+    };
   in {
     enable = true;
     package = pkgs.neovim-nightly;
@@ -26,6 +35,7 @@
       # Misc
       plenary-nvim
       telescope-nvim
+      telescope-any
       gitsigns-nvim
       nvim-autopairs
       lualine-nvim
@@ -421,52 +431,74 @@
 
         -- Telescope
 
-        local Telescope = require("telescope.builtin")
+        -- keybindings was replaced by telescope-any
+        -- {
+        --   mode = "n",
+        --   lhs = ";f",
+        --   rhs = function()
+        --     Telescope_Telescope_builtin.find_files({
+        --       respect_gitignore = false,
+        --       no_ignore = false,
+        --       hidden = true,
+        --     })
+        --   end,
+        --   opts = {
+        --     desc = "[Telescope] Find files.",
+        --   },
+        -- },
+        -- {
+        --   mode = "n",
+        --   lhs = ";r",
+        --   rhs = function()
+        --     Telescope_Telescope_builtin.live_grep({
+        --     	respect_gitignore = false,
+        --     })
+        --   end,
+        --   opts = {
+        --     desc = "[Telescope] Find files by word.",
+        --   },
+        -- },
+        -- {
+        --   mode = "n",
+        --   lhs = ";s",
+        --   rhs = function()
+        --     Telescope_Telescope_builtin.treesitter()
+        --   end,
+        --   opts = {
+        --     desc = "[Telescope] List definitions.",
+        --   },
+        -- },
+        -- {
+        --   mode = "n",
+        --   lhs = ";g",
+        --   rhs = function()
+        --     Telescope_Telescope_builtin.git_files({ hidden = true })
+        --   end,
+        --   opts = {
+        --     desc = "[Telescope] List definitions.",
+        --   },
+        -- },
+
+        local Telescope_builtin = require("telescope.builtin")
+        local Telescope_any = require("telescope-any").create_telescope_any({
+          pickers = {
+            [""]    = Telescope_builtin.current_buffer_fuzzy_find,
+            ["g "]  = Telescope_builtin.live_grep,
+            ["f "]  = Telescope_builtin.find_files,
+            ["b "]  = Telescope_builtin.buffers,
+            ["gf "] = Telescope_builtin.git_files,
+            ["gc "] = Telescope_builtin.git_commits,
+          },
+        })
+
         keys.telescope = {
           {
             mode = "n",
-            lhs = ";f",
-            rhs = function()
-              Telescope.find_files({
-                respect_gitignore = false,
-                no_ignore = false,
-                hidden = true,
-              })
-            end,
+            lhs = "/",
+            rhs = Telescope_any,
             opts = {
-              desc = "[Telescope] Find files.",
-            },
-          },
-          {
-            mode = "n",
-            lhs = ";r",
-            rhs = function()
-              Telescope.live_grep({
-              	respect_gitignore = false,
-              })
-            end,
-            opts = {
-              desc = "[Telescope] Find files by word.",
-            },
-          },
-          {
-            mode = "n",
-            lhs = ";s",
-            rhs = function()
-              Telescope.treesitter()
-            end,
-            opts = {
-              desc = "[Telescope] List definitions.",
-            },
-          },
-          {
-            mode = "n",
-            lhs = ";g",
-            rhs = function()
-              Telescope.git_files({ hidden = true })
-            end,
-            opts = {
-              desc = "[Telescope] List definitions.",
+              desc = "[Telescope] Find any.",
+              silent = true,
             },
           },
         }
