@@ -35,11 +35,10 @@
     ];
   };
 
-  boot.supportedFilesystems = [ "ntfs" ];
   fileSystems."/mnt/extern-1" = {
-    device = "/dev/disk/by-uuid/AE1A53381A52FCB1";
-    fsType = "ntfs-3g";
-    options = [ "rw" "uid=1000"];
+    device = "/dev/disk/by-uuid/39f3f8e2-b801-4720-838e-877031207e06";
+    fsType = "ext4";
+    options = [ "rw" ];
   };
 
   nixpkgs.config.allowUnfree = true;
