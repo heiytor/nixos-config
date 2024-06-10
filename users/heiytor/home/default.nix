@@ -7,7 +7,7 @@
   home = {
     username = "heiytor";
     homeDirectory = "/home/heiytor";
-    stateVersion = "23.11";
+    stateVersion = "24.05";
   };
 
   imports = [
@@ -55,9 +55,8 @@
     unzip
     unrar
     nix-prefetch
-
-    # TODO: install this in a dev environment
-    openssl
-    go
+    vlc
+    
+    obs-studio
   ];
 }

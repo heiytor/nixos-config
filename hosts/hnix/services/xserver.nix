@@ -4,23 +4,27 @@
   services.xserver = {
     enable = true;
     autorun = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
     displayManager = {
       lightdm = {
         enable = true;
-      };
-      # TODO: remove autoLogin from here 
-      defaultSession = "none+awesome";
-      autoLogin = {
-        enable = true;
-        user = "heiytor";
       };
     };
     windowManager = {
       awesome = {
         enable = true;
       };
+    };
+  };
+  services.displayManager = {
+    # TODO: remove autoLogin from here 
+    defaultSession = "none+awesome";
+    autoLogin = {
+      enable = true;
+      user = "heiytor";
     };
   };
 }

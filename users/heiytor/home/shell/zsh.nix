@@ -9,7 +9,7 @@
     enable = true;
     icons = true;
     git = true;
-    enableAliases = true;
+    # enableAliases = true;
   };
 
   programs.direnv = {
@@ -39,5 +39,8 @@
       plugins = [ "git" "sudo" ];
       theme = "sorin";
     };
+    initExtra = ''
+      eval "$(direnv hook zsh)"
+    '';
   };
 }
