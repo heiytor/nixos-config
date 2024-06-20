@@ -9,6 +9,6 @@
       size = 12;
       package = pkgs.jetbrains-mono;
     };
-    # theme = "";
+    theme = "Jellybeans";
   };
 }
