@@ -56,7 +56,6 @@
     unrar
     nix-prefetch
     vlc
-    
-    obs-studio
+    copyq
   ];
 }
