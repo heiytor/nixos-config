@@ -12,10 +12,10 @@
 
   imports = [
     (import ./editor/nvim.nix { inherit pkgs lib; })
-    (import ./misc/direnv.nix {})
+    (import ./misc/direnv.nix { })
     (import ./misc/fonts.nix { inherit config pkgs; })
     (import ./misc/git.nix { inherit config pkgs; })
-    (import ./misc/picom.nix { inherit config pkgs; })
+    (import ./misc/picom.nix { })
     (import ./misc/polybar.nix { inherit config pkgs; })
     (import ./misc/ssh.nix { inherit config pkgs;})
     (import ./shell/zsh.nix { inherit config pkgs; })
