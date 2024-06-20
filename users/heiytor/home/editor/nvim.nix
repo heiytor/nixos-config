@@ -1,41 +1,33 @@
-{ config, pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   programs.neovim = let
-    typescript-language-server = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
-    telescope-any = pkgs.vimUtils.buildVimPlugin {
-      name = "telescope-any";
-      src = pkgs.fetchFromGitHub {
-        owner = "d00h";
-        repo = "telescope-any";
-        rev = "0e79dd6131c8a7282899679cd9ffa14e74d2c973";
-        hash = "sha256-S6IE2VJ8dPoAhg2CBvQ3KO3BD56Q9GLJJwQ1r0+UfXo=";
+    fromGitHub = repo: ref: rev: pkgs.vimUtils.buildVimPlugin {
+      name = "${lib.strings.sanitizeDerivationName repo}";
+      src = builtins.fetchGit {
+        url = "https://github.com/${repo}.git";
+        ref = ref;
+        rev = rev;
       };
     };
+
+    typescript-language-server = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
   in {
     enable = true;
-    package = pkgs.neovim-nightly;
     defaultEditor = true;
-    plugins = with pkgs.vimPlugins; [
-      # Treesitter
+    package = pkgs.neovim-nightly;
+    plugins = (with pkgs.vimPlugins; [
       nvim-treesitter.withAllGrammars
       nvim-treesitter-context
-
-      # LSP, auto-completion and formatters
       lsp-zero-nvim
       nvim-lspconfig
       formatter-nvim
       nvim-cmp
       cmp-nvim-lsp
       luasnip
-      
-      # Colorschemes
-      kanagawa-nvim
-
-      # Misc
+      # kanagawa-nvim
       plenary-nvim
       telescope-nvim
-      telescope-any
       gitsigns-nvim
       nvim-autopairs
       lualine-nvim
@@ -46,6 +38,13 @@
       nvim-colorizer-lua
       rainbow-delimiters-nvim
       todo-comments-nvim
+    ]) ++ [
+      (fromGitHub "d00h/telescope-any" "master" "0e79dd6131c8a7282899679cd9ffa14e74d2c973")
+
+      # > Colorschemes: 
+      (fromGitHub "huyvohcmc/atlas.vim" "master" "f254465adbcae565d9cf8c987f5a797c1f9cf922")
+      # (fromGitHub "axvr/photon.vim" "master" "32b42c8a12bf9588259b76f3df6807960e0d7386")
+      # (fromGitHub "datsfilipe/vesper.nvim" "main" "b26a348293cc6a16941f6429e3a20de58a584170")
     ];
     extraPackages = with pkgs; [
       # TODO: install LSP in flake.nix
@@ -97,15 +96,13 @@
         vim.opt.isfname:append("@-@")
         vim.opt.updatetime = 50
 
-
         -------------------------------------------
         -------------------------------------------
         ---                Theme                ---
         -------------------------------------------
         -------------------------------------------
 
-        require('kanagawa').setup({ theme = "dragon" })
-        vim.cmd("colorscheme kanagawa-dragon")
+        vim.cmd("colorscheme atlas")
 
         -- [Optional] Disable the background color
         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })

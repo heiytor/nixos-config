@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   # Self download
@@ -11,7 +11,7 @@
   };
 
   imports = [
-    (import ./editor/nvim.nix { inherit config pkgs; })
+    (import ./editor/nvim.nix { inherit pkgs lib; })
     (import ./misc/direnv.nix {})
     (import ./misc/fonts.nix { inherit config pkgs; })
     (import ./misc/git.nix { inherit config pkgs; })
