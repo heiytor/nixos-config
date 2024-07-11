@@ -57,5 +57,9 @@
     nix-prefetch
     vlc
     copyq
+    btop
+    killall
+
+    jetbrains-toolbox
   ];
 }
