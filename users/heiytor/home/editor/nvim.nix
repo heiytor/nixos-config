@@ -25,7 +25,7 @@
       nvim-cmp
       cmp-nvim-lsp
       luasnip
-      # kanagawa-nvim
+      kanagawa-nvim
       plenary-nvim
       telescope-nvim
       gitsigns-nvim
@@ -42,7 +42,7 @@
       (fromGitHub "d00h/telescope-any" "master" "0e79dd6131c8a7282899679cd9ffa14e74d2c973")
 
       # > Colorschemes: 
-      (fromGitHub "huyvohcmc/atlas.vim" "master" "f254465adbcae565d9cf8c987f5a797c1f9cf922")
+      # (fromGitHub "huyvohcmc/atlas.vim" "master" "f254465adbcae565d9cf8c987f5a797c1f9cf922")
       # (fromGitHub "axvr/photon.vim" "master" "32b42c8a12bf9588259b76f3df6807960e0d7386")
       # (fromGitHub "datsfilipe/vesper.nvim" "main" "b26a348293cc6a16941f6429e3a20de58a584170")
     ];
@@ -55,6 +55,7 @@
       rust-analyzer # rust language server
       nixd          # nix language server
       clang-tools   # c languague tools
+      ruby-lsp      # ruby lsp
     ];
     extraConfig = ''
       lua << EOF
@@ -102,7 +103,9 @@
         -------------------------------------------
         -------------------------------------------
 
-        vim.cmd("colorscheme atlas")
+        -- vim.cmd("colorscheme atlas")
+        require('kanagawa').setup({ theme = "dragon" })
+        vim.cmd("colorscheme kanagawa-dragon")
 
         -- [Optional] Disable the background color
         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -646,6 +649,9 @@
         -- c language server
         LSPconfig.clangd.setup({ settings = {} })
 
+        -- ruby language server
+        LSPconfig.solargraph.setup({})
+
         -- typescript language server
         LSPconfig.tsserver.setup({
           cmd = { "${typescript-language-server}", "--stdio" },
@@ -707,6 +713,7 @@
         require("formatter").setup({
           filetype = {
             go = require("formatter.filetypes").go.gofmt,
+            -- ruby = require("formatter.filetypes").ruby.rubocop,
           },
         })
 
