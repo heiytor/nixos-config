@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
 
       ./security/sudo.nix
+      ./services/cron.nix
       ./services/docker.nix
       ./services/pipewire.nix
       ./services/xserver.nix
