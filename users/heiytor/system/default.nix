@@ -5,6 +5,7 @@
     isNormalUser = true;
     description = "Heitor Danilo";
     extraGroups = [
+      "audio"
       "networkmanager"
       "wheel"
       "docker"
