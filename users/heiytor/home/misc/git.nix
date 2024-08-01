@@ -10,6 +10,7 @@
       core = {
         editor = "nvim";
         pager = "delta";
+        autocrlf = "input";
       };
       user = {
         name = "Heitor Danilo";
@@ -39,6 +40,14 @@
         contents = {
           user = {
             email = "heitor.danilo@ossystems.com.br";
+          };
+        };
+      }
+      {
+        condition = "gitdir:~/projects/speedio/";
+        contents = {
+          user = {
+            email = "heitor.barros@speedio.com.br";
           };
         };
       }

@@ -18,6 +18,7 @@
     (import ./misc/picom.nix { })
     (import ./misc/polybar.nix { inherit config pkgs; })
     (import ./misc/ssh.nix { inherit config pkgs;})
+    (import ./misc/zoxide.nix)
     (import ./shell/zsh.nix { inherit config pkgs; })
     (import ./terminal/alacritty.nix { inherit config pkgs; })
     (import ./terminal/kitty.nix { inherit pkgs; })
@@ -59,7 +60,9 @@
     copyq
     btop
     killall
+    obs-studio
 
     jetbrains-toolbox
+    zed-editor
   ];
 }

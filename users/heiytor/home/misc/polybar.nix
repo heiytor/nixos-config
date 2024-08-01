@@ -13,16 +13,24 @@
     '';
     config = {
       "colors" = {
-        background = "#90161616"; # COLOR: #161616
-        foreground = "#C6C6C6";
-        primary = "#AF87D7";
-        alert = "#AF5F87";
-        disabled = "#707880";
-        urgent = "#F27360";
+        # background = "#161616"; 
+        # foreground = "#C6C6C6";
+        # primary = "#AF87D7";
+        # alert = "#AF5F87";
+        # disabled = "#707880";
+        # urgent = "#F27360";
+
+        background = "#FFFFFF";
+        foreground = "#16181A";
+        primary = "#008B0C";
+        alert = "#D100Bf";
+        disabled = "#7B8496";
+        urgent = "#D11500";
       };
       "bar/example" = {
+        bottom = true;
+
         font-0 = "JetBrainsMono:size=10;2";
-        
         # Nerd fonts
         font-1 = "FontAwesome6Free:style=Solid:size=9;2";
         font-2 = "FontAwesome6Free:style=Regular:size=9;2";

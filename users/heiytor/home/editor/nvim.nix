@@ -42,6 +42,7 @@
       (fromGitHub "d00h/telescope-any" "master" "0e79dd6131c8a7282899679cd9ffa14e74d2c973")
 
       # > Colorschemes: 
+      (fromGitHub "scottmckendry/cyberdream.nvim" "main" "bb3011a38b94ac4f13c107f5f1b3464c1c03ced1")
       # (fromGitHub "huyvohcmc/atlas.vim" "master" "f254465adbcae565d9cf8c987f5a797c1f9cf922")
       # (fromGitHub "axvr/photon.vim" "master" "32b42c8a12bf9588259b76f3df6807960e0d7386")
       # (fromGitHub "datsfilipe/vesper.nvim" "main" "b26a348293cc6a16941f6429e3a20de58a584170")
@@ -104,12 +105,16 @@
         -------------------------------------------
 
         -- vim.cmd("colorscheme atlas")
-        require('kanagawa').setup({ theme = "dragon" })
-        vim.cmd("colorscheme kanagawa-dragon")
+
+        -- require('kanagawa').setup({ theme = "dragon" })
+        -- vim.cmd("colorscheme kanagawa-dragon")
+
+        require("cyberdream").setup({ theme = { variant = "light" } })
+        vim.cmd("colorscheme cyberdream")
 
         -- [Optional] Disable the background color
-        vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+        -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+        -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
         -------------------------------------------
         -------------------------------------------
