@@ -1,0 +1,7 @@
+{ }:
+
+{
+  services.teleport = {
+    enable = true;
+  };
+}
