@@ -1,5 +1,3 @@
-{ }:
-
 {
   services.teleport = {
     enable = true;

@@ -13,6 +13,7 @@
       ./services/ssh.nix
       ./services/udev.nix
       ./services/zerotier.nix
+      ./services/teleport.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
